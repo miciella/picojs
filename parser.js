@@ -115,6 +115,17 @@ export function parser(tokens) {
     return null;
   }
 
+  function GreaterThanToken(){
+    if(token.type === "GreaterThanToken"){
+      const _token = token;
+      next("expression");
+      return _token;
+    }
+    return null;
+  }
+
+
+
   function MulToken() {
     if (token.type === "MulToken") {
       const _token = token;
@@ -210,6 +221,11 @@ export function parser(tokens) {
     take("OpenParent", "expression");
     const condition = Expression();
     if (!condition) {
+      panic("Expected an Expression for condition");
+    }
+    take("GreaterThanToken", "expression");
+    const cond = Expression() || Statement() || GreaterThanToken();
+    if (!cond){
       panic("Expected an Expression for condition");
     }
     take("CloseParent", "expression");

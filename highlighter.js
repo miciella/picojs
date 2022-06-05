@@ -2,6 +2,7 @@ const COLORS = {
   DivToken: "\x1b[31m",
   MulToken: "\x1b[31m",
   PlusToken: "\x1b[31m",
+  GreaterThanToken: "\x1b[31m",
   RegExpToken: "\x1b[33m",
   String: "\x1b[32m",
   Id: "\x1b[34m",

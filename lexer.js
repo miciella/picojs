@@ -1,3 +1,4 @@
+
 function isNumeric(c) {
   return "0" <= c && c <= "9";
 }
@@ -120,6 +121,20 @@ export function lexer(file, str) {
       };
     }
 
+    if (char === ">"){
+      const start = position();
+      next();
+      if(char === ""){
+        next();
+        return number();
+      }
+      const end = position();
+      return{
+        type: "GreaterThanToken",
+        loc: {file, start, end},
+      };
+    }
+
     if (char === "/") {
       const start = position();
       next();
@@ -136,6 +151,7 @@ export function lexer(file, str) {
 
     return null;
   }
+
 
   function number() {
     let buffer = "";
@@ -159,7 +175,7 @@ export function lexer(file, str) {
 
   const KEYWORDS = {
     if: "If",
-    else: "Else",
+    el: "Else",
     function: "Function",
   };
 
